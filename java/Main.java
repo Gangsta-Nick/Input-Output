@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
+import java.util.zip.*;
 
 class Main {
     public static StringBuilder sb = new StringBuilder();
@@ -15,7 +13,7 @@ class Main {
 
     public static void directoryCreate(StringBuilder sb) {
         try {
-            File dir = new File("D://Games1");
+            File dir = new File("D://Games");
             String dirSuccess = (dir.mkdir() ? dir.getName() + " создан\n" : dir.getName() + " уже был создан или отсутствует\n");
             sb.append(dirSuccess);
 
@@ -68,7 +66,7 @@ class Main {
     }
 
     public static void tempWriter(StringBuilder sb) {
-        try (Writer writer = new FileWriter("D://Games1/temp/temp.txt", false)) {
+        try (Writer writer = new FileWriter("D://Games/temp/temp.txt", false)) {
             writer.append(sb);
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -77,7 +75,7 @@ class Main {
 
     public static void saveGame() {
         GameProgress gameProgress = new GameProgress(100, 1, 1, 100.0);
-        try (FileOutputStream fos = new FileOutputStream("D://Games1/savegames/save.dat");
+        try (FileOutputStream fos = new FileOutputStream("D://Games/savegames/save.dat");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(gameProgress);
         } catch (IOException exception) {
@@ -85,7 +83,7 @@ class Main {
         }
 
 //        GameProgress gameProgressOriginal = null;
-//        try (FileInputStream fis = new FileInputStream("D://Games1/savegames/save.dat");
+//        try (FileInputStream fis = new FileInputStream("D://Games/savegames/save.dat");
 //             ObjectInputStream ois = new ObjectInputStream(fis)) {
 //            gameProgressOriginal = (GameProgress) ois.readObject();
 //        } catch (IOException | ClassNotFoundException exception) {
@@ -93,7 +91,7 @@ class Main {
 //        }
 
         GameProgress gameProgress1 = new GameProgress(94, 3, 5, 153.4);
-        try (FileOutputStream fos = new FileOutputStream("D://Games1/savegames/save1.dat");
+        try (FileOutputStream fos = new FileOutputStream("D://Games/savegames/save1.dat");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(gameProgress1);
         } catch (IOException exception) {
@@ -101,7 +99,7 @@ class Main {
         }
 
 //        GameProgress gameProgressOne = null;
-//        try (FileInputStream fis = new FileInputStream("D://Games1/savegames/save1.dat");
+//        try (FileInputStream fis = new FileInputStream("D://Games/savegames/save1.dat");
 //             ObjectInputStream ois = new ObjectInputStream(fis)) {
 //            gameProgressOne = (GameProgress) ois.readObject();
 //        } catch (IOException | ClassNotFoundException exception) {
@@ -109,7 +107,7 @@ class Main {
 //        }
 
         GameProgress gameProgress2 = new GameProgress(85, 8, 8, 188.99);
-        try (FileOutputStream fos = new FileOutputStream("D://Games1/savegames/save2.dat");
+        try (FileOutputStream fos = new FileOutputStream("D://Games/savegames/save2.dat");
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(gameProgress2);
         } catch (IOException exception) {
@@ -117,7 +115,7 @@ class Main {
         }
     }
 //        GameProgress gameProgressTwo = null;
-//        try (FileInputStream fis = new FileInputStream("D://Games1/savegames/save2.dat");
+//        try (FileInputStream fis = new FileInputStream("D://Games/savegames/save2.dat");
 //             ObjectInputStream ois = new ObjectInputStream(fis)) {
 //            gameProgressTwo = (GameProgress) ois.readObject();
 //        } catch (IOException | ClassNotFoundException exception) {
@@ -126,9 +124,9 @@ class Main {
 
     public static void zipFilesConvetrter() {
         try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream("D://Games1/game_saves.zip"));
-             FileInputStream fis = new FileInputStream("D://Games1/savegames/save.dat");
-             FileInputStream fis1 = new FileInputStream("D://Games1/savegames/save1.dat");
-             FileInputStream fis2 = new FileInputStream("D://Games1/savegames/save2.dat")) {
+             FileInputStream fis = new FileInputStream("D://Games/savegames/save.dat");
+             FileInputStream fis1 = new FileInputStream("D://Games/savegames/save1.dat");
+             FileInputStream fis2 = new FileInputStream("D://Games/savegames/save2.dat")) {
             ZipEntry entry = new ZipEntry("save.dat");
             zout.putNextEntry(entry);
             byte[] buffer = new byte[fis.available()];
@@ -153,7 +151,7 @@ class Main {
     }
 
 //    public static void zipOpen() {
-//        try (ZipInputStream zis = new ZipInputStream(new FileInputStream("D://Games1/game_saves.zip"))) {
+//        try (ZipInputStream zis = new ZipInputStream(new FileInputStream("D://Games/game_saves.zip"))) {
 //            ZipEntry entry;
 //            String name;
 //            while ((entry = zis.getNextEntry()) != null) {
